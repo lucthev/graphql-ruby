@@ -3,6 +3,16 @@ require "spec_helper"
 
 describe GraphQL::Schema::Argument do
   module SchemaArgumentTest
+    class LazyBlock
+      def initialize(&block)
+        @get_value = block
+      end
+
+      def value
+        @get_value.call
+      end
+    end
+
     class Query < GraphQL::Schema::Object
       field :field, String, null: true do
         argument :arg, String, description: "test", required: false
@@ -45,13 +55,16 @@ describe GraphQL::Schema::Argument do
 
     class Schema < GraphQL::Schema
       query(Query)
+      lazy_resolve(LazyBlock, :value)
       if TESTING_INTERPRETER
         use GraphQL::Execution::Interpreter
         use GraphQL::Analysis::AST
       end
 
       def self.object_from_id(id, ctx)
-        Jazz::GloballyIdentifiableType.find(id)
+        LazyBlock.new {
+          Jazz::GloballyIdentifiableType.find(id)
+        }
       end
 
       orphan_types [Jazz::InstrumentType]
