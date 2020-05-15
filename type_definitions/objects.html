@@ -19,7 +19,7 @@
           </a>
           <a href="/getting_started">Get Started</a>
           <a href="/guides">Guides</a>
-          <a href="/api-doc/1.10.5/">API</a>
+          <a href="/api-doc/1.10.9/">API</a>
           <a href="https://tinyletter.com/graphql-ruby">Newsletter</a>
           <a href="https://github.com/rmosolgo/graphql-ruby">Source Code</a>
           <a href="https://graphql.pro">Upgrade to Pro</a>
@@ -84,7 +84,7 @@
 
 <p>The same object can be defined using Ruby:</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Types</span><span class="o">::</span><span class="no">User</span> <span class="o">&lt;</span> <span class="no">GraphQL</span><span class="o">::</span><span class="no">Schema</span><span class="o">::</span><span class="no">Object</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Types::User</span> <span class="o">&lt;</span> <span class="no">GraphQL</span><span class="o">::</span><span class="no">Schema</span><span class="o">::</span><span class="no">Object</span>
   <span class="n">field</span> <span class="ss">:email</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">true</span>
   <span class="n">field</span> <span class="ss">:handle</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
   <span class="n">field</span> <span class="ss">:friends</span><span class="p">,</span> <span class="p">[</span><span class="no">User</span><span class="p">],</span> <span class="ss">null: </span><span class="kp">false</span>
@@ -95,18 +95,18 @@
 
 <h2 id="object-classes">Object classes</h2>
 
-<p>Classes extending <a href="/api-doc/1.10.5/GraphQL/Schema/Object" target="_blank" title="API docs for GraphQL::Schema::Object"><code>GraphQL::Schema::Object</code></a> describe <a href="https://graphql.org/learn/schema/#object-types-and-fields">Object types</a> and customize their behavior.</p>
+<p>Classes extending <a href="/api-doc/1.10.9/GraphQL/Schema/Object" target="_blank" title="API docs for GraphQL::Schema::Object"><code>GraphQL::Schema::Object</code></a> describe <a href="https://graphql.org/learn/schema/#object-types-and-fields">Object types</a> and customize their behavior.</p>
 
 <p>Object fields can be created with the <code class="highlighter-rouge">field(...)</code> class method, <a href="#fields">described in detail below</a></p>
 
 <p>Field and argument names should be underscored as a convention. They will be converted to camelCase in the underlying GraphQL type and be camelCase in the schema itself.</p>
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># first, somewhere, a base class:</span>
-<span class="k">class</span> <span class="nc">Types</span><span class="o">::</span><span class="no">BaseObject</span> <span class="o">&lt;</span> <span class="no">GraphQL</span><span class="o">::</span><span class="no">Schema</span><span class="o">::</span><span class="no">Object</span>
+<span class="k">class</span> <span class="nc">Types::BaseObject</span> <span class="o">&lt;</span> <span class="no">GraphQL</span><span class="o">::</span><span class="no">Schema</span><span class="o">::</span><span class="no">Object</span>
 <span class="k">end</span>
 
 <span class="c1"># then...</span>
-<span class="k">class</span> <span class="nc">Types</span><span class="o">::</span><span class="no">TodoList</span> <span class="o">&lt;</span> <span class="no">Types</span><span class="o">::</span><span class="no">BaseObject</span>
+<span class="k">class</span> <span class="nc">Types::TodoList</span> <span class="o">&lt;</span> <span class="no">Types</span><span class="o">::</span><span class="no">BaseObject</span>
   <span class="n">description</span> <span class="s2">"A list of items which may be completed"</span>
 
   <span class="n">field</span> <span class="ss">:name</span><span class="p">,</span> <span class="no">String</span><span class="p">,</span> <span class="s2">"The unique name of this list"</span><span class="p">,</span> <span class="ss">null: </span><span class="kp">false</span>
